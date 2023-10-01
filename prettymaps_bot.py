@@ -48,12 +48,14 @@ PRETTYMAPS_PRESETS = [
     if "barcelona-plotter" not in p
 ]
 
-IMG_TOOT_TEMPLATE = """🗺 Where is this place ?
+IMG_TOOT_TEMPLATE = """🗺 Which place is this ?
+
+📍 Clue: this place is in {country_name}
 
 👇 You can answer in the poll which is in the first reply 👇
 
 #prettymaps"""
-POLL_TOOT_TPL = """📍 Clue: this place is in {country_name}"""
+POLL_TOOT_TPL = """Which place is this ?"""
 ANSWER_TOOT_TPL = """The correct answer is : {answer}"""
 ANSWER_TOOT_CW_TPL = "✅ Correct answer"
 
