@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "prettymaps-guessr-bot"
+version = "0.1.0"
+description = ""
+authors = ["GA <contact@guilhemallaman.net>"]
+readme = "README.md"
+packages = [{include = "prettymaps_guess_bot"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+prettymaps = "^1.0.0"
+shapely = "^1.8.5"
+colorlog = "^6.7.0"
+mastodon-py = "^1.8.1"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.4.0"
+black = "^23.9.1"
+isort = "^5.12.0"
+mypy = "^1.5.1"
+types-pyyaml = "^6.0.12.12"
+types-requests = "^2.31.0.7"
+
+[tool.isort]
+profile = "black"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
