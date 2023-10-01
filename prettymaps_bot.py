@@ -163,7 +163,7 @@ def build_arguments() -> Namespace:
         "-r",
         "--radius",
         default=50,
-        help="Radius (km) used to get an OTM place around a random point",
+        help="Radius (km) used to get an OpenTripMap place around a randomly created point",
     )
     parser.add_argument(
         "-ho",

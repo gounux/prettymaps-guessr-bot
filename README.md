@@ -40,7 +40,7 @@ Several options are available:
 -p PRESET, --preset PRESET
                     Prettymaps preset to use (default to 'random', available: barcelona,cb-bf-f,default,heerhugowaard,macao,minimal,tijuca)
 -r RADIUS, --radius RADIUS
-                    Radius (km) used to get an OTM place around a random point
+                    Radius (km) used to get an OpenTripMap place around a randomly created point
 -ho HOURS, --hours HOURS
                     After how many hours the mastodon poll is expired (default to 24)
 -v, --verbose         Verbose output
