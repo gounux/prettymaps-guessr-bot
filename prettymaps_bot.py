@@ -237,6 +237,8 @@ if __name__ == "__main__":
         visibility="public",
         language="en",
     )
+    os.remove(map_path)
+
     # reply with poll
     poll_toot = mastodon.status_post(
         status=POLL_TOOT_TPL.format(
@@ -252,6 +254,7 @@ if __name__ == "__main__":
         visibility="unlisted",
         language="en",
     )
+
     # reply with correct answer
     mastodon.status_post(
         status=ANSWER_TOOT_TPL.format(
