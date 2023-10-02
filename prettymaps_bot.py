@@ -228,7 +228,7 @@ if __name__ == "__main__":
 
     # toot map image first
     img_toot = mastodon.status_post(
-        IMG_TOOT_TEMPLATE,
+        IMG_TOOT_TEMPLATE.format(country_name=country_name),
         media_ids=[
             mastodon.media_post(
                 map_path,
