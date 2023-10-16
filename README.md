@@ -45,3 +45,18 @@ Several options are available:
                     After how many hours the mastodon poll is expired (default to 24)
 -v, --verbose         Verbose output
 ```
+
+### Run using docker image
+
+Create local docker image:
+
+```bash
+docker build -t prettymapsguessrbot:$(poetry version --short) -t prettymapsguessrbot:latest .
+```
+
+Run local docker image:
+
+```bash
+source .env
+docker run -e MASTODON_INSTANCE=${MASTODON_INSTANCE} -e MASTODON_ACCESS_TOKEN=${MASTODON_ACCESS_TOKEN} -e OPENTRIPMAP_API_KEY=${OPENTRIPMAP_API_KEY} prettymapsguessrbot:latest
+```
