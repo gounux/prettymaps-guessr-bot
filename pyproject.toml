@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "A mastodon bot that posts sone polls to guess the location of a random prettymaps map"
 authors = ["GA <contact@guilhemallaman.net>"]
 readme = "README.md"
-packages = [{include = "prettymaps_guess_bot"}]
+packages = []
 
 [tool.poetry.dependencies]
 python = "^3.10"
