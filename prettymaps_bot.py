@@ -158,7 +158,7 @@ def build_arguments() -> Namespace:
     parser.add_argument(
         "-p",
         "--preset",
-        default="random",
+        default="default",
         help=f"Prettymaps preset to use (default to 'random', available: {','.join(PRETTYMAPS_PRESETS)})",
     )
     parser.add_argument(

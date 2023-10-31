@@ -38,7 +38,7 @@ Several options are available:
 -n NB_PICKS, --nb_picks NB_PICKS
                     Number of available picks (between 2 and 4, default to 3)
 -p PRESET, --preset PRESET
-                    Prettymaps preset to use (default to 'random', available: barcelona,cb-bf-f,default,heerhugowaard,macao,minimal,tijuca)
+                    Prettymaps preset to use (default to 'default', available: barcelona,cb-bf-f,default,heerhugowaard,macao,minimal,tijuca,random)
 -r RADIUS, --radius RADIUS
                     Radius (km) used to get an OpenTripMap place around a randomly created point
 -ho HOURS, --hours HOURS
