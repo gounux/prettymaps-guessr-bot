@@ -38,6 +38,7 @@ if "OPENTRIPMAP_API_KEY" not in os.environ:
 
 MASTODON_INSTANCE = os.getenv("MASTODON_INSTANCE")
 MASTODON_ACCESS_TOKEN = os.getenv("MASTODON_ACCESS_TOKEN")
+MAX_POLL_OPTION_LENGTH = 50
 OPENTRIPMAP_API_KEY = os.getenv("OPENTRIPMAP_API_KEY")
 OPENTRIPMAP_URL = "https://api.opentripmap.com/0.1/en/places/radius"
 NOMINATIM_URL = "https://nominatim.openstreetmap.org"
@@ -124,11 +125,15 @@ def get_nominatim_address(feature: Dict[str, Any]) -> Tuple[str, Dict[str, Any]]
     return nmntm_feat["properties"]["display_name"], nmntm_feat["properties"]["address"]
 
 
-def create_poll_option(name: str, address: Dict[str, Any], max_length: int = 50) -> str:
+def create_poll_option(
+    name: str, address: Dict[str, Any], max_length: int = MAX_POLL_OPTION_LENGTH
+) -> str:
     city = address.get("municipality", address.get("town", "somewhere"))
     region = address.get("state", address.get("region", "somewhere"))
     opt = f"{name}, {city}, {region}"
-    return opt if len(opt) <= max_length else f"{name}, {city}"
+    if len(opt) <= max_length:
+        return opt
+    return f"{opt[:max_length - 2]}.."
 
 
 def generate_prettymaps_image(address: str, preset: str) -> str:
