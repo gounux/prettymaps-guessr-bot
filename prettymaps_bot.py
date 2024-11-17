@@ -119,6 +119,7 @@ def get_nominatim_address(feature: Dict[str, Any]) -> Tuple[str, Dict[str, Any]]
     nominatim_r: Response = requests.get(
         f"{NOMINATIM_URL}/reverse",
         params={"lon": point.x, "lat": point.y, "format": "geojson"},
+        headers={"Accept": "application/json", "User-Agent": "prettymaps_guessr"},
     )
     assert len(nominatim_r.json()["features"]) == 1
     nmntm_feat = nominatim_r.json()["features"][0]
