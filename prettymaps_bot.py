@@ -242,7 +242,7 @@ if __name__ == "__main__":
                 description=f"A map of a place somewhere in {country_name} generated with Prettymaps",
             )
         ],
-        visibility="public",
+        visibility="unlisted",
         language="en",
     )
     os.remove(map_path)
