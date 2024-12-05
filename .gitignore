@@ -165,4 +165,4 @@ prettymaps*.png
 pm*.png
 
 # official env file
-.env.official
+.env.*
