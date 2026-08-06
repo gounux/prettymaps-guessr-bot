@@ -139,7 +139,9 @@ def create_poll_option(
 
 def generate_prettymaps_image(address: str, preset: str) -> str:
     path = f"prettymaps_{datetime.now().strftime('%Y%m%d-%H%M%S')}_{preset}.png"
-    prettymaps.plot(query=address, preset=preset, save_as=path)
+    prettymaps.plot(
+        query=address, preset=preset, save_as=path, show=False, logging=True
+    )
     return path
 
 
@@ -226,6 +228,7 @@ if __name__ == "__main__":
         random.choice(PRETTYMAPS_PRESETS) if args.preset == "random" else args.preset
     )
     map_path = generate_prettymaps_image(names[idx_pick], preset)
+    logger.info(f"Prettymaps image generated: {map_path} (preset: {preset})")
 
     # toot on mastodon instance configured with environment variables
     mastodon = Mastodon(
