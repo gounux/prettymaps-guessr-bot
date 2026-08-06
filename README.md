@@ -8,10 +8,19 @@ The center of the map image is a POI randomly found with [OpenTripMap](https://o
 
 ## Setup
 
-This bot uses poetry, that can be installed using `python3 -m pip install poetry`.
+This bot uses `uv`, see [the official installation doc](https://docs.astral.sh/uv/getting-started/installation/).
 
-- install project's dependencies: `poetry install`
-- install project's pre-commit hooks: `poetry run pre-commit install`
+Then install project's dependencies:
+
+```sh
+uv sync
+```
+
+Also install pre-commit hooks:
+
+```sh
+pre-commit install
+```
 
 ## Configure
 
@@ -26,7 +35,7 @@ Following environment variables must be set:
 Run the bot using following command:
 
 ```bash
-poetry run python3 prettymaps_bot.py
+uv run python3 prettymaps_guessr_bot/prettymaps_bot.py
 ```
 
 Several options are available:
@@ -44,19 +53,4 @@ Several options are available:
 -ho HOURS, --hours HOURS
                     After how many hours the mastodon poll is expired (default to 24)
 -v, --verbose         Verbose output
-```
-
-### Run using docker image
-
-Create local docker image:
-
-```bash
-docker build -t prettymapsguessrbot:$(poetry version --short) -t prettymapsguessrbot:latest .
-```
-
-Run local docker image:
-
-```bash
-source .env
-docker run -e MASTODON_INSTANCE=${MASTODON_INSTANCE} -e MASTODON_ACCESS_TOKEN=${MASTODON_ACCESS_TOKEN} -e OPENTRIPMAP_API_KEY=${OPENTRIPMAP_API_KEY} prettymapsguessrbot:latest
 ```
