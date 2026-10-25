@@ -7,22 +7,20 @@ requires-python = ">=3.12,<4"
 readme = "README.md"
 classifiers = [
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
 ]
 dependencies = [
     "prettymaps>=1.4.2,<2",
-    "shapely>=2.1.2,<3",
+    "shapely>=2.2.0,<3",
     "colorlog>=6.12.0,<7",
-    "mastodon-py>=2.2.2,<3",
+    "mastodon-py>=2.3.3,<3",
 ]
 
 [dependency-groups]
 dev = [
-    "pre-commit>=4.6.1,<5",
+    "pre-commit>=4.7.0,<5",
     "types-pyyaml>=6.0.12.12,<7",
     "types-requests>=2.31.0.7,<3",
 ]
