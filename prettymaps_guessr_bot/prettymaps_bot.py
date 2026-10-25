@@ -8,7 +8,12 @@ from datetime import datetime, timedelta
 from typing import Any, Dict, Tuple
 
 import colorlog
-import prettymaps
+import matplotlib
+
+# non-interactive backend: maps are only saved to files, never displayed
+matplotlib.use("Agg")
+
+import prettymaps  # noqa: E402
 import requests
 from mastodon import Mastodon
 from requests import Response
