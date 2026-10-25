@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import json
 import logging
 import os
@@ -5,7 +7,7 @@ import random
 import sys
 from argparse import ArgumentParser, Namespace
 from datetime import datetime, timedelta
-from typing import Any, Dict, Tuple
+from typing import Any
 
 import colorlog
 import matplotlib
@@ -13,7 +15,7 @@ import matplotlib
 # non-interactive backend: maps are only saved to files, never displayed
 matplotlib.use("Agg")
 
-import prettymaps  # noqa: E402
+import prettymaps
 import requests
 from mastodon import Mastodon
 from requests import Response
@@ -33,13 +35,13 @@ logger.addHandler(handler)
 # retrieve environment variables
 if "MASTODON_INSTANCE" not in os.environ:
     logger.error("Error: MASTODON_INSTANCE environment variable not set")
-    exit(1)
+    sys.exit(1)
 if "MASTODON_ACCESS_TOKEN" not in os.environ:
     logger.error("Error: MASTODON_ACCESS_TOKEN environment variable not set")
-    exit(1)
+    sys.exit(1)
 if "OPENTRIPMAP_API_KEY" not in os.environ:
     logger.error("Error: OPENTRIPMAP_API_KEY environment variable not set")
-    exit(1)
+    sys.exit(1)
 
 MASTODON_INSTANCE = os.getenv("MASTODON_INSTANCE")
 MASTODON_ACCESS_TOKEN = os.getenv("MASTODON_ACCESS_TOKEN")
@@ -66,7 +68,7 @@ ANSWER_TOOT_TPL = """The correct answer is : {answer}"""
 ANSWER_TOOT_CW_TPL = "✅ Correct answer"
 
 
-def pick_country(country: str) -> Dict[str, Any]:
+def pick_country(country: str) -> dict[str, Any]:
     with open("world_countries.geojson", "r") as file:
         geojson = json.loads(file.read())
         assert geojson["type"] == "FeatureCollection"
@@ -86,7 +88,7 @@ def generate_random_point(polygon: Polygon) -> Point:
 
 def get_otm_place(
     polygon: Polygon, radius_km: int, rate: int = 3, limit: int = 50
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     # generate a random point inside polygon
     rnd_point = generate_random_point(polygon)
 
@@ -113,13 +115,13 @@ def get_otm_place(
 
     feature = random.choice(features)
     assert feature["geometry"]["type"] == "Point"
-    logging.debug(
+    logger.debug(
         f"OpenTripMap feature: {feature['properties']['name']} {feature['geometry']['coordinates']}"
     )
     return feature
 
 
-def get_nominatim_address(feature: Dict[str, Any]) -> Tuple[str, Dict[str, Any]]:
+def get_nominatim_address(feature: dict[str, Any]) -> tuple[str, dict[str, Any]]:
     point: Point = shape(feature["geometry"])
     nominatim_r: Response = requests.get(
         f"{NOMINATIM_URL}/reverse",
@@ -132,14 +134,14 @@ def get_nominatim_address(feature: Dict[str, Any]) -> Tuple[str, Dict[str, Any]]
 
 
 def create_poll_option(
-    name: str, address: Dict[str, Any], max_length: int = MAX_POLL_OPTION_LENGTH
+    name: str, address: dict[str, Any], max_length: int = MAX_POLL_OPTION_LENGTH
 ) -> str:
     city = address.get("municipality", address.get("town", "somewhere"))
     region = address.get("state", address.get("region", "somewhere"))
     opt = f"{name}, {city}, {region}"
     if len(opt) <= max_length:
         return opt
-    return f"{opt[:max_length - 2]}.."
+    return f"{opt[: max_length - 2]}.."
 
 
 def generate_prettymaps_image(address: str, preset: str) -> str:
@@ -206,12 +208,12 @@ if __name__ == "__main__":
     nb_hours = int(args.hours)
     if nb_picks < 2 or nb_picks > 4:
         logger.error("Number of picks must be between 2 and 4")
-        exit(1)
+        sys.exit(1)
 
     country = pick_country(args.country)
     country_name = country["properties"]["ADMIN"]
     polygon = shape(country["geometry"])
-    logging.info(f"Country: {country_name}")
+    logger.info(f"Country: {country_name}")
 
     # generate picks
     otm_places = [get_otm_place(polygon, radius_km) for _ in range(nb_picks)]
